@@ -1,0 +1,7 @@
+boto3
+pandas
+numpy
+openai
+requests
+PyMuPDF
+reportlab
