@@ -81,6 +81,8 @@ def lambda_handler(event, context):
 
         # Drop duplicates
         df.drop_duplicates(inplace=True)
+        drop_cols = ['hours_sale', 'hours_stock_status']
+        df.drop(columns=[col for col in drop_cols if col in df.columns], inplace=True)
 
         print("Cleaned preview:\n", df.head())
 
