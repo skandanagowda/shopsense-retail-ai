@@ -14,6 +14,11 @@ s3://your-bucket/
 ├── actual-sales/              # Queried CSV outputs from Athena
 ├── pdf-reports/               # Final PDF reports (weekly/monthly)
 ```
+![S3 Bucket](screenshots/S3_bucket.png)
+![Raw to Cleaned](screenshots/retail_cleaned_data_folder.png)
+![Insights JSON](screenshots/llm_insights_folder.png)
+![Actual Sales CSV](screenshots/actual_sales_folder.png)
+![PDF Reports](screenshots/pdf_report_folder.png)
 
 ---
 
@@ -37,6 +42,8 @@ s3://your-bucket/
 
   * Starts AWS Glue Crawler
   * Updates Athena table with new partitions
+    
+🖼️ ![Glue Table](screenshots/Glue_Table.png)
 
 ### 3️⃣ **ShopSenseInsightsLambda**
 
@@ -47,6 +54,8 @@ s3://your-bucket/
   * Feeds result + prompt to **OpenRouter's Mistral LLM**
   * Saves JSON response to `llm-insights/`
 * **Layer**: Includes `openai`, `boto3`, `pandas`
+  
+🖼️ ![EventBridge Rule](screenshots/EventBridge_Rule.png)
 
 ### 4️⃣ **ReportGeneratorLambda**
 
@@ -120,6 +129,8 @@ s3://your-bucket/
 * **CloudWatch Logs**: View per function logs
 * **Layers**: Shared dependencies zipped and uploaded
 
+🖼️ ![CloudWatch Logs](screenshots/CloudWatch.png)
+
 ---
 
 ## 🧾 Tech Stack
@@ -138,10 +149,27 @@ s3://your-bucket/
 
 * Store OpenRouter API Key, email, and bucket in `.env`
 * Use `dotenv` package to load securely inside Lambda
+* All secrets and configs are stored in `.env`:
+
+```env
+# AWS Athena
+ATHENA_DATABASE=retail_db
+ATHENA_OUTPUT_LOCATION=s3://your-output-bucket/query-results/
+ATHENA_TABLE=retail_cleaned_data
+
+# OpenRouter
+OPENROUTER_API_KEY=your_openrouter_api_key
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+
+# SES Email
+SES_SENDER_EMAIL=your_verified_sender@example.com
+SES_RECEIVER_EMAIL=recipient@example.com
+```
 
 ---
 
 ## 👨‍💻 Author
 
 **Skandana Gowda**
+**Built for the AWS Lambda Hackathon**
 
