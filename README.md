@@ -171,5 +171,6 @@ SES_RECEIVER_EMAIL=recipient@example.com
 ## 👨‍💻 Author
 
 **Skandana Gowda**
+
 **Built for the AWS Lambda Hackathon**
 
